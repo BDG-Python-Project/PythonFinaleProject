@@ -1,29 +1,38 @@
 from random import randint
+from realist import Realist
+from fool import Fool
+from positive import Positive
 
-# class Base:
-#     def __init__(self, name1, name2, name3, name4, name5):
-#         self.man1 = name1
-#         self.man2 = name2
-#         self.man3 = name3
-#         self.man4 = name4
-#         self.man5 = name5
-names_list = ["Ալեքսանդր", "Արամ", "Անահիտ", "իրինա", "Նարինե", "Արմեն", "Հայկ", "Սիլվա", "Սանասար", "Բաղդասար"]
-picked_names_set = set()
-picked_ages_list = []
-while len(picked_names_set) < 5:
-    random_index = randint(0, len(names_list)-1)
-    picked_names_set.add(names_list[random_index])
+names_list = ["Ալեքսանդր", "Արամ", "Անահիտ", "Իրինա", "Նարինե", "Արմեն", "Հայկ", "Սիլվա", "Սանասար", "Բաղդասար"]
+characters = [Fool, Positive, Realist]
+persons = []
+
 for j in range(5):
     random_age = randint(20, 40)
-    picked_ages_list.append(random_age)
-name_age_dict = dict(zip(picked_names_set, picked_ages_list))
-print(name_age_dict)
+    index = randint(0, len(names_list) - 1)
+    random_name = names_list[index]
+    del names_list[index]
+
+    character = characters[randint(0, len(characters) - 1)]
+    person = character(random_name, random_age)
+    persons.append(person)
+
+chat_content = ""
+for person in persons:
+    chat_content += f"{person.get_name()} {person.get_age()} տարեկան \n"
+
+chat_content += "\n\n"
+
+for person in persons:
+    others = [p for p in persons if p != person]
+
+    for some_person in others:
+        chat_content += person.say_hello(some_person) + "\n"
+        chat_content += some_person.say_hello(person) + "\n"
+
+    persons = others
 
 
-
-
-
-
-
-
-
+chat_file = open("chat_messages.txt", "w", encoding='utf-8')
+chat_file.write(chat_content)
+chat_file.close()
