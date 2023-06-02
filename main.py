@@ -29,8 +29,10 @@ for person in persons:
     for some_person in others:
         chat_content += person.say_hello(some_person) + "\n"
         chat_content += some_person.say_hello(person) + "\n"
+        chat_content += "\n"
 
     persons = others
+    chat_content += "\n\n"
 
 
 chat_file = open("chat_messages.txt", "w", encoding='utf-8')

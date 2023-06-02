@@ -6,4 +6,4 @@ class Positive(Base):
         Base.__init__(self, name, age)
 
     def say_hello(self, person):
-        return self.get_name() + ":\n\tՈղջույն, " + person.get_name()
+        return self.get_name() + ":\n\tՈղջույն \U0001F642, " + person.get_name()

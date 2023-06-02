@@ -6,4 +6,4 @@ class Fool(Base):
         Base.__init__(self, name, age)
 
     def say_hello(self, person):
-        return self.get_name() + ":\n\tԲարև, " + person.get_name() + "!"
+        return self.get_name() + ":\n\tԲարև \U0001f600, " + person.get_name() + "!"
